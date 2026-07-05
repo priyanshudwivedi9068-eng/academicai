@@ -12,14 +12,14 @@ const generateTokensAndSetCookies = (res, userId) => {
   res.cookie('access_token', accessToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
     maxAge: 15 * 60 * 1000 
   });
 
   res.cookie('refresh_token', refreshToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
     maxAge: 7 * 24 * 60 * 60 * 1000 
   });
 
@@ -117,8 +117,18 @@ export const logout = async (req, res) => {
       }
     }
     
-    res.cookie('access_token', '', { httpOnly: true, expires: new Date(0) });
-    res.cookie('refresh_token', '', { httpOnly: true, expires: new Date(0) });
+    res.cookie('access_token', '', { 
+      httpOnly: true, 
+      expires: new Date(0),
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict'
+    });
+    res.cookie('refresh_token', '', { 
+      httpOnly: true, 
+      expires: new Date(0),
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict'
+    });
     res.json({ message: 'Logged out successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
