@@ -33,7 +33,7 @@ npm install
 Create a `.env` file in both the `frontend` and `backend` directories using the provided `.env.example` templates. You will need:
 - MongoDB URI
 - Google Gemini API Key
-- Pinecone API Key (Create an index named `academicai-index` with dimension `768`)
+- Pinecone API Key (Create an index named `academicai` with dimension `768`)
 
 ### 3. Run the Servers
 Open two terminal windows:

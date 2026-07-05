@@ -6,7 +6,7 @@ const ai = process.env.GEMINI_API_KEY ? new GoogleGenAI({ apiKey: process.env.GE
 
 // Initialize Pinecone
 const pc = process.env.PINECONE_API_KEY ? new Pinecone({ apiKey: process.env.PINECONE_API_KEY }) : null;
-const indexName = process.env.PINECONE_INDEX || 'academicai-index';
+const indexName = process.env.PINECONE_INDEX || 'academicai';
 
 export const chunkText = (text, maxLength = 1000) => {
   const paragraphs = text.split(/\n\s*\n/);

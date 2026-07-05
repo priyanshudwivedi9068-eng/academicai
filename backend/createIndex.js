@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY });
-const indexName = process.env.PINECONE_INDEX || 'academicai-index';
+const indexName = process.env.PINECONE_INDEX || 'academicai';
 
 async function createIndex() {
   try {
