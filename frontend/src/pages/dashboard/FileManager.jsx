@@ -4,7 +4,7 @@ import axios from 'axios';
 import { UploadCloud, FileText, MoreVertical, Search, Filter, Trash2, Edit2 } from 'lucide-react';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
   withCredentials: true,
 });
 
