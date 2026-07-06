@@ -14,6 +14,8 @@ const DashboardLayout = () => {
   const { isDarkMode, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
 
   const navItems = [
     { name: 'Overview', path: '/dashboard', icon: <LayoutDashboard className="w-5 h-5" /> },
@@ -139,12 +141,72 @@ const DashboardLayout = () => {
             >
               {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
-            <button className="relative p-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 rounded-full transition-colors">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white dark:border-slate-900"></span>
-            </button>
-            <div className="flex items-center justify-center w-8 h-8 ml-2 rounded-full bg-gradient-to-br from-primary-500 to-purple-600 text-white font-bold text-sm shadow-md cursor-pointer hover:shadow-lg transition-all" title={user?.name || 'User'}>
-              {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+            <div className="relative">
+              <button 
+                onClick={() => { setIsProfileMenuOpen(false); setIsNotificationsOpen(!isNotificationsOpen); }}
+                className="relative p-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 rounded-full transition-colors"
+              >
+                <Bell className="w-5 h-5" />
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white dark:border-slate-900"></span>
+              </button>
+              
+              <AnimatePresence>
+                {isNotificationsOpen && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    className="absolute right-0 mt-2 w-64 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-700 overflow-hidden z-50"
+                  >
+                    <div className="p-4 border-b border-slate-100 dark:border-slate-700">
+                      <h3 className="font-bold text-slate-900 dark:text-white">Notifications</h3>
+                    </div>
+                    <div className="p-4 text-center text-sm text-slate-500 dark:text-slate-400">
+                      No new notifications
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <div className="relative">
+              <div 
+                onClick={() => { setIsNotificationsOpen(false); setIsProfileMenuOpen(!isProfileMenuOpen); }}
+                className="flex items-center justify-center w-8 h-8 ml-2 rounded-full bg-gradient-to-br from-primary-500 to-purple-600 text-white font-bold text-sm shadow-md cursor-pointer hover:shadow-lg transition-all" 
+                title={user?.name || 'User'}
+              >
+                {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+              </div>
+
+              <AnimatePresence>
+                {isProfileMenuOpen && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    className="absolute right-0 mt-2 w-56 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-700 overflow-hidden z-50"
+                  >
+                    <div className="p-4 border-b border-slate-100 dark:border-slate-700">
+                      <p className="font-bold text-sm text-slate-900 dark:text-white truncate">{user?.name}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{user?.email}</p>
+                    </div>
+                    <div className="p-2">
+                      <button 
+                        onClick={() => { setIsProfileMenuOpen(false); navigate('/dashboard/settings'); }}
+                        className="w-full text-left px-3 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg flex items-center gap-2"
+                      >
+                        <Settings className="w-4 h-4" /> Settings
+                      </button>
+                      <button 
+                        onClick={handleLogout}
+                        className="w-full text-left px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg flex items-center gap-2 mt-1"
+                      >
+                        <LogOut className="w-4 h-4" /> Log Out
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </header>
