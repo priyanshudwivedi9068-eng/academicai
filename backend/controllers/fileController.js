@@ -33,7 +33,7 @@ export const uploadFile = async (req, res) => {
 
   } catch (error) {
     console.error('Upload error:', error);
-    res.status(500).json({ message: 'Server error during upload' });
+    res.status(500).json({ message: 'Server error during upload', error: error.message });
   }
 };
 

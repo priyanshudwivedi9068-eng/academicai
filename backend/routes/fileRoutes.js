@@ -37,7 +37,15 @@ const upload = multer({
   }
 });
 
-router.post('/upload', protect, upload.single('file'), uploadFile);
+router.post('/upload', protect, function (req, res, next) {
+  upload.single('file')(req, res, function (err) {
+    if (err) {
+      console.error('Multer upload error:', err);
+      return res.status(500).json({ message: 'File upload middleware error', error: err.message });
+    }
+    next();
+  });
+}, uploadFile);
 router.get('/', protect, getFiles);
 router.delete('/:id', protect, deleteFile);
 router.put('/:id/rename', protect, renameFile);
