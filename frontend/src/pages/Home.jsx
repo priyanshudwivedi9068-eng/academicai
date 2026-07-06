@@ -120,7 +120,7 @@ const HeroMockup = () => {
         {}
         <div className="ml-16 flex-1 flex flex-col bg-white">
           <div className="p-6 pb-2">
-            <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">👋 Hi, Alex!</h2>
+            <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">👋 Hi, Priyanshu!</h2>
             <p className="text-xs text-slate-500">How can I help you today?</p>
           </div>
 
@@ -382,7 +382,7 @@ const Home = () => {
             <div className="bg-white rounded-3xl p-10 border border-slate-200 shadow-sm flex flex-col">
               <h3 className="text-2xl font-bold text-slate-900 mb-2">Basic</h3>
               <p className="text-slate-500 mb-6">Perfect for getting started.</p>
-              <div className="mb-8"><span className="text-5xl font-extrabold text-slate-900">$0</span><span className="text-slate-500">/forever</span></div>
+              <div className="mb-8"><span className="text-5xl font-extrabold text-slate-900">₹0</span><span className="text-slate-500">/forever</span></div>
               <ul className="flex flex-col gap-4 mb-8 flex-1">
                 <li className="flex items-center gap-3 text-slate-700"><CheckCircle2 className="w-5 h-5 text-slate-400" /> 3 documents per month</li>
                 <li className="flex items-center gap-3 text-slate-700"><CheckCircle2 className="w-5 h-5 text-slate-400" /> Basic AI Chat</li>
@@ -393,7 +393,7 @@ const Home = () => {
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary-600 text-white text-xs font-bold uppercase tracking-wider py-1 px-4 rounded-full">Most Popular</div>
               <h3 className="text-2xl font-bold text-slate-900 mb-2">Pro</h3>
               <p className="text-slate-500 mb-6">For serious academic performance.</p>
-              <div className="mb-8"><span className="text-5xl font-extrabold text-slate-900">$12</span><span className="text-slate-500">/month</span></div>
+              <div className="mb-8"><span className="text-5xl font-extrabold text-slate-900">₹999</span><span className="text-slate-500">/month</span></div>
               <ul className="flex flex-col gap-4 mb-8 flex-1">
                 <li className="flex items-center gap-3 text-slate-700"><CheckCircle2 className="w-5 h-5 text-primary-600" /> Unlimited documents</li>
                 <li className="flex items-center gap-3 text-slate-700"><CheckCircle2 className="w-5 h-5 text-primary-600" /> Advanced Quiz & Flashcards</li>
@@ -415,6 +415,12 @@ const Home = () => {
             </Link>
           </div>
         </div>
+
+        {/* Footer */}
+        <footer className="w-full border-t border-slate-100 mt-12 py-8 text-center text-slate-500 text-sm">
+          <p>© 2026 AcadAssist (AcademicAI). Built by Priyanshu Dwivedi.</p>
+          <p className="mt-2">Contact: +91 9140327108</p>
+        </footer>
 
       </main>
     </div>

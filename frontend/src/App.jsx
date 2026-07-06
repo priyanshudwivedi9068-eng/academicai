@@ -23,10 +23,14 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       
-      {}
+      {/* Protected Dashboard Routes */}
       <Route 
         path="/dashboard" 
-        element={<DashboardLayout />}
+        element={
+          <ProtectedRoute>
+            <DashboardLayout />
+          </ProtectedRoute>
+        }
       >
         <Route index element={<Overview />} />
         <Route path="chat" element={<AIChat />} />
