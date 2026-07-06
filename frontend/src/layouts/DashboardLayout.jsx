@@ -143,6 +143,9 @@ const DashboardLayout = () => {
               <Bell className="w-5 h-5" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white dark:border-slate-900"></span>
             </button>
+            <div className="flex items-center justify-center w-8 h-8 ml-2 rounded-full bg-gradient-to-br from-primary-500 to-purple-600 text-white font-bold text-sm shadow-md cursor-pointer hover:shadow-lg transition-all" title={user?.name || 'User'}>
+              {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+            </div>
           </div>
         </header>
 
