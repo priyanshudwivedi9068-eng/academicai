@@ -5,22 +5,25 @@ import { OAuth2Client } from 'google-auth-library';
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-const generateTokensAndSetCookies = (res, userId) => {
+export const generateTokensAndSetCookies = (res, userId) => {
   const accessToken = jwt.sign({ id: userId }, process.env.JWT_ACCESS_SECRET, { expiresIn: '15m' });
   const refreshToken = jwt.sign({ id: userId }, process.env.JWT_REFRESH_SECRET, { expiresIn: '7d' });
 
-  res.cookie('access_token', accessToken, {
+  // Force cross-site cookie settings to ensure Vercel-to-Render works regardless of NODE_ENV
+  const cookieOptions = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-    maxAge: 15 * 60 * 1000 
+    secure: true, 
+    sameSite: 'none',
+  };
+
+  res.cookie('access_token', accessToken, {
+    ...cookieOptions,
+    maxAge: 15 * 60 * 1000 // 15 minutes
   });
 
   res.cookie('refresh_token', refreshToken, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-    maxAge: 7 * 24 * 60 * 60 * 1000 
+    ...cookieOptions,
+    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
   });
 
   return refreshToken;
@@ -120,14 +123,14 @@ export const logout = async (req, res) => {
     res.cookie('access_token', '', { 
       httpOnly: true, 
       expires: new Date(0),
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict'
+      secure: true,
+      sameSite: 'none'
     });
     res.cookie('refresh_token', '', { 
       httpOnly: true, 
       expires: new Date(0),
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict'
+      secure: true,
+      sameSite: 'none'
     });
     res.json({ message: 'Logged out successfully' });
   } catch (error) {
