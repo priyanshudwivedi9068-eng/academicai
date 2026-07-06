@@ -12,6 +12,7 @@ import FileManager from './pages/dashboard/FileManager';
 import StudyRoom from './pages/dashboard/StudyRoom';
 import CalendarView from './pages/dashboard/CalendarView';
 import Settings from './pages/dashboard/Settings';
+import Billing from './pages/dashboard/Billing';
 
 import './App.css';
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="files" element={<FileManager />} />
         <Route path="study" element={<StudyRoom />} />
         <Route path="calendar" element={<CalendarView />} />
+        <Route path="billing" element={<Billing />} />
         <Route path="settings" element={<Settings />} />
       </Route>
     </Routes>

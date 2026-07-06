@@ -8,9 +8,11 @@ import {
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
   const { isDarkMode, toggleTheme } = useTheme();
+  const { user } = useAuth();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 transition-colors">
@@ -41,12 +43,24 @@ const Navbar = () => {
           <button onClick={toggleTheme} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
             {isDarkMode ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
           </button>
-          <Link to="/login" className="px-6 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-full hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-            Login
-          </Link>
-          <Link to="/register" className="px-6 py-2.5 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-full transition-all shadow-md shadow-primary-600/20">
-            Get Started
-          </Link>
+          
+          {user ? (
+            <Link to="/dashboard" className="px-6 py-2.5 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-full transition-all shadow-md shadow-primary-600/20 flex items-center gap-2">
+              <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-[10px] font-bold">
+                {user?.name?.charAt(0) || 'U'}
+              </div>
+              Dashboard
+            </Link>
+          ) : (
+            <>
+              <Link to="/login" className="px-6 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-full hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                Login
+              </Link>
+              <Link to="/register" className="px-6 py-2.5 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-full transition-all shadow-md shadow-primary-600/20">
+                Get Started
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>
@@ -399,7 +413,7 @@ const Home = () => {
                 <li className="flex items-center gap-3 text-slate-700"><CheckCircle2 className="w-5 h-5 text-primary-600" /> Advanced Quiz & Flashcards</li>
                 <li className="flex items-center gap-3 text-slate-700"><CheckCircle2 className="w-5 h-5 text-primary-600" /> Priority Gemini 1.5 Pro access</li>
               </ul>
-              <Link to="/dashboard" className="w-full block text-center py-3 rounded-xl bg-primary-600 hover:bg-primary-700 text-white font-medium shadow-md shadow-primary-600/20">Upgrade to Pro</Link>
+              <Link to="/dashboard/billing" className="w-full block text-center py-3 rounded-xl bg-primary-600 hover:bg-primary-700 text-white font-medium shadow-md shadow-primary-600/20">Upgrade to Pro</Link>
             </div>
           </div>
         </div>

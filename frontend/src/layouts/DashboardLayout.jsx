@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   LayoutDashboard, MessageSquare, Folder, BookOpen, 
   Calendar, Settings, LogOut, Menu, X, Sun, Moon, Bell,
-  Search
+  Search, CreditCard
 } from 'lucide-react';
 
 const DashboardLayout = () => {
@@ -23,6 +23,7 @@ const DashboardLayout = () => {
     { name: 'Files', path: '/dashboard/files', icon: <Folder className="w-5 h-5" /> },
     { name: 'Study Room', path: '/dashboard/study', icon: <BookOpen className="w-5 h-5" /> },
     { name: 'Calendar', path: '/dashboard/calendar', icon: <Calendar className="w-5 h-5" /> },
+    { name: 'Billing', path: '/dashboard/billing', icon: <CreditCard className="w-5 h-5" /> },
     { name: 'Settings', path: '/dashboard/settings', icon: <Settings className="w-5 h-5" /> },
   ];
 
